@@ -1,8 +1,20 @@
 function fetchData(url, successCallback, errorCallback) {
-  const xhr = new XMLHttpRequest();
+  const xmlHttpRequest = new XMLHttpRequest();
   // <-- start
   // TODO 21: 通过XMLHttpRequest实现异步请求
-
+  // debugger;
+  xmlHttpRequest.onreadystatechange = function() {
+    // console.log(xmlHttpRequest.readyState);
+    if (xmlHttpRequest.readyState === 4) {
+      if (xmlHttpRequest.status === 200) {
+        successCallback(xmlHttpRequest.responseText);
+      } else {
+        errorCallback(xmlHttpRequest.statusText);
+      }
+    }
+  };
+  xmlHttpRequest.open('GET', url);
+  xmlHttpRequest.send();
   // end -->
 }
 
